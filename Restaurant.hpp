@@ -9,6 +9,8 @@
 #include <string>
 #include <list>
 #include <queue>
+#include <ostream>
+
 using namespace std;
 
 #include "Driver.hpp"
@@ -31,6 +33,7 @@ public:
     void status();
     void deliver(Driver & driver, float tip, Time time);
     void summary();
+    string Insummary();
 };
 
 // Constructor
@@ -132,6 +135,39 @@ void Restaurant::summary() {
         cout << "Total driving time: " << it->getTripTime() << endl;
         cout << "Total tips: " << it->getTips() << endl;
     }
+}
+
+// Secret Function
+string Restaurant::Insummary() {
+    string full_string;
+
+    if (grandTotalDelivered != 0){
+//        cout << "Number of orders completed: " << grandTotalDelivered << endl;
+        full_string += "Number of orders completed: " + to_string(grandTotalDelivered) + "\n";
+//        cout << "Average time per order: " << totalDeliveryTime/grandTotalDelivered << endl;
+        full_string += "Average time per order: " + to_string(int(int(totalDeliveryTime)/grandTotalDelivered)) + "\n";
+    }
+
+
+
+    for (auto it: drivers) {
+//        cout << "Driver " << it->getName() << ":" << endl;
+        full_string += "Driver " + it->getName() + ":\n";
+//        cout << "Number of deliveries completed: " << it->getDeliveries() << endl;
+        full_string += "Number of deliveries completed: " + to_string(int(it->getDeliveries())) + "\n";
+//        cout << "Average time per delivery: " << it->getDeliveryTime() << endl;
+        full_string += "Average time per delivery: " + to_string(int(it->getDeliveryTime())) + "\n";
+//        cout << "Total driving time: " << it->getTripTime() << endl;
+        full_string += "Total driving time: " + to_string(int(it->getTripTime())) + "\n";
+//        cout << "Total tips: " << it->getTips() << endl;
+       // Convert float Tips to string removing the extra 0's
+        string tips = to_string(it->getTips());
+        tips.erase(tips.find_last_not_of('0') + 1, string::npos);
+        full_string += "Total tips: " + tips + "\n";
+
+
+    }
+    return full_string;
 }
 
 #endif //PIZZA_RESTAURANT_HPP

@@ -6,6 +6,7 @@ using namespace std;
 #include "Driver.hpp"
 #include "Restaurant.hpp"
 #include <map>
+#include <fstream>
 
 //int main()
 //{
@@ -55,7 +56,6 @@ int main () {
 
     Restaurant res;
     bool repeat = true;
-    cout << "--------------------------------------------------------" << endl;
     cout << "?  :  View Instructions\n+  :  Add New Driver\n>  : Add Driver to Restaurant\nI  :  Log In Driver In\nO  :  Log Out Driver\nA  :  Add Order\nS  :  Serve Order\nD  :  Depart Order\n!  :  Deliver Order\nR  :  Return Driver\nT  :  View Status\nU  :  View Summary\nQ  :  Quit\n";
 //    Driver dan("Dan");
 //    Driver ada("Ada");
@@ -67,7 +67,11 @@ int main () {
         cout << "Enter Selection: ";
         basic_string<char, char_traits<char>, allocator<char>> initial;
         cin >> selection;
+        cin.ignore();
         switch (selection) {
+            // Fix White Space Issue
+            case ' ':
+                break;
             case '?':
                 cout << "?  :  View Instructions\n+  :  Add New Driver\n>  : Add Driver to Restaurant\nI  :  Log In Driver In\nO  :  Log Out Driver\nA  :  Add Order\nS  :  Serve Order\nD  :  Depart Order\n!  :  Deliver Order\nR  :  Return Driver\nT  :  View Status\nU  :  View Summary\nQ  :  Quit\n";
                 break;
@@ -127,6 +131,7 @@ int main () {
                 }
                 break;
             }
+
             case 'A': {
                 // Add order to restaurant
                 string order;
@@ -135,7 +140,7 @@ int main () {
                 // Input order into string
                 cin.ignore();
                 getline(cin, order);
-                cout << "Enter Time as follows \"hour\" \"min\": \n";
+                cout << "Enter Time: \n";
                 cin >> hour >> minute;
 
                 Time time(hour, minute);
@@ -247,6 +252,15 @@ int main () {
             case 'U':{
                 // View summary
                 res.summary();
+                // write summary to file output.txt
+                // Create output file in current project directory if it does not exist
+                ofstream output;
+                // in current project directory
+                string path = std::__fs::filesystem::current_path();
+                path += "/output.txt";
+                output.open(path);
+                output << res.Insummary();
+                output.close();
                 break;
             }
 
@@ -261,7 +275,6 @@ int main () {
                 break;
 
         }
-        cout << "--------------------------------------------------------" << endl;
     }
 
     return 0;

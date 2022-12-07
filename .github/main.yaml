@@ -1,0 +1,16 @@
+# GitHub Action to test unit_test.sh from ./test folder
+
+name: Unit Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run unit test
+      run: |
+        cd test
+        ./unit_test.sh
+
