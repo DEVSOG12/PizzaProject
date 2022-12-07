@@ -57,6 +57,7 @@ int main () {
 
     Restaurant res;
     bool repeat = true;
+    cout << "--------------------------------------------------------" << endl;
     cout << "?  :  View Instructions\n+  :  Add New Driver\n>  : Add Driver to Restaurant\nI  :  Log In Driver In\nO  :  Log Out Driver\nA  :  Add Order\nS  :  Serve Order\nD  :  Depart Order\n!  :  Deliver Order\nR  :  Return Driver\nT  :  View Status\nU  :  View Summary\nQ  :  Quit\n";
 //    Driver dan("Dan");
 //    Driver ada("Ada");
@@ -68,7 +69,7 @@ int main () {
         cout << "Enter Selection: ";
         basic_string<char, char_traits<char>, allocator<char>> initial;
         cin >> selection;
-        cin.ignore();
+        cin.ignore(); // ignore the newline character
         switch (selection) {
             // Fix White Space Issue
             case ' ':
@@ -141,7 +142,7 @@ int main () {
                 // Input order into string
                 cin.ignore();
                 getline(cin, order);
-                cout << "Enter Time: \n";
+                cout << "Enter Time as follows \"hour\" \"min\": \n";
                 cin >> hour >> minute;
 
                 Time time(hour, minute);
@@ -277,6 +278,8 @@ int main () {
                 break;
 
         }
+        cout << "--------------------------------------------------------" << endl;
+
     }
 
     return 0;
