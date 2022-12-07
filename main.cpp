@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 using namespace std;
 #include "Time.hpp"
@@ -256,9 +258,10 @@ int main () {
                 // Create output file in current project directory if it does not exist
                 ofstream output;
                 // in current project directory
-                string path = std::__fs::filesystem::current_path();
-                path += "/output.txt";
-                output.open(path);
+
+                fs::path p = fs::current_path();
+                p.append("output.txt");
+                output.open(p);
                 output << res.Insummary();
                 output.close();
                 break;
