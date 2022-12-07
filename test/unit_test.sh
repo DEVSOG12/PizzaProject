@@ -22,12 +22,14 @@ diff output.txt expected_output.txt
 if [ $? -eq 0 ]; then
     echo "✅ Test case passed"
     rm temp.txt
+    rm output.txt
     rm test
     exit 0
 #    Tell GitHub CI/CD the test failed
 else
     echo "Test case failed"
     rm temp.txt
+    rm output.txt
     rm test
     exit 1
 fi

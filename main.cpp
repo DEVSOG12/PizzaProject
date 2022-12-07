@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-
-using namespace std;
 #include "Time.hpp"
 #include "Driver.hpp"
 #include "Restaurant.hpp"
 #include <map>
 #include <fstream>
+
+using namespace std;
+
 
 //int main()
 //{
@@ -258,10 +257,10 @@ int main () {
                 // Create output file in current project directory if it does not exist
                 ofstream output;
                 // in current project directory
+                // ios::app appends to file
+                output.open("output.txt", ios::app);
+                // Write summary to file
 
-                fs::path p = fs::current_path();
-                p.append("output.txt");
-                output.open(p);
                 output << res.Insummary();
                 output.close();
                 break;
